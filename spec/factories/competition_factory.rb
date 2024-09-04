@@ -42,6 +42,10 @@ FactoryBot.define do
 
     initialize_with { attributes.stringify_keys }
 
+    trait :forbid_edits do
+      allow_registration_edits { false }
+    end
+
     trait :no_guest_limit do
       guest_entry_status { 'free' }
       guests_per_registration_limit { nil }

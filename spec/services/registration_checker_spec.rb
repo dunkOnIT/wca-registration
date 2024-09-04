@@ -722,8 +722,9 @@ describe RegistrationChecker do
         end
       end
 
-      it 'organizer can change user registration' do
+      it 'organizer can change user registration even if edits are not allowed', :tag do
         update_request = FactoryBot.build(:update_request, :organizer_for_user, user_id: @registration[:user_id])
+        override_competition_info = FactoryBot.build(:competition, :forbid_edits)
 
         expect { RegistrationChecker.update_registration_allowed!(update_request, @competition_info, update_request['submitted_by']) }
           .not_to raise_error
